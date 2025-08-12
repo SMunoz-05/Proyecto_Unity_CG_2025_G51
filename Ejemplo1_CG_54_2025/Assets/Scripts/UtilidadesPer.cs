@@ -1,38 +1,38 @@
-using System.IO;
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using packagePersona;
+using System.IO;
 
 public class UtilidadesPer
 {
     public static bool SaveDataStudent(List<Estudiante> listaE)
     {
-        bool resultado = false;
+        //bool resultado = false;
         try
         {
-            ListaEstudiantes le = new ListaEstudiantes();
-            le.estudiantes = listaE;
 
-            string jsonString = JsonUtility.ToJson(le, true);
+            string jsonString = JsonUtility.ToJson(listaE, true);
             Debug.Log("Lista JSON: " + jsonString);
+            string directoryPath = Application.streamingAssetsPath;
 
-            string path = Path.Combine(Application.streamingAssetsPath, "estudiantes.json");
-            File.WriteAllText(path, jsonString);
-
-            resultado = true;
+            string filePath = Path.Combine(directoryPath, "dataSaveStudent.json");
+            File.WriteAllText(filePath, jsonString);
+            return true;
         }
         catch (System.Exception ex)
         {
             Debug.LogError("Error al guardar JSON: " + ex.Message);
+            return false;
         }
 
-        return resultado;
+        //return resultado;
     }
 
-    [System.Serializable]
-    private class ListaEstudiantes
+    [Serializable]
+    public class ListaEstudiantes
     {
         public List<Estudiante> estudiantes;
     }
 }
-
+   

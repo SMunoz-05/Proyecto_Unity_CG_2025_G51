@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
-using PackagePunto2D;   
+using System.Collections.Generic; 
 using packagePersona;  
 
 public class Utilidades : MonoBehaviour

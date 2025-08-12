@@ -1,28 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
-using System;
-
-namespace PackagePunto2D
+[System.Serializable]
+public class Punto2D
 {
-    [Serializable]
-    public class Punto2D
+    public float x;
+    public float y;
+}
+
+[System.Serializable]
+public class PuntosWrapper
+{
+    public List<Punto2D> puntos;
+}
+
+public class EjemploCarga : MonoBehaviour
+{
+    public string jsonString;
+
+    void Start()
     {
-        private double x;
-        private double y;
+        PuntosWrapper wrapper = JsonUtility.FromJson<PuntosWrapper>(jsonString);
 
+        List<Punto2D> listaDePuntos = new List<Punto2D>();
 
-        public Punto2D()
+        if (wrapper != null && wrapper.puntos != null)
         {
+            foreach (Punto2D p in wrapper.puntos)
+            {
+                listaDePuntos.Add(p);
+                Debug.Log($"Punto: x={p.x}, y={p.y}");
+            }
         }
-
-        public Punto2D(double x, double y)
+        else
         {
-            X = x;
-            Y = y;
+            Debug.LogError("No se pudo parsear el JSON o no hay puntos.");
         }
-
-        public double X { get => x; set => x = value; }
-        public double Y { get => y; set => y = value; }
-
-
     }
 }

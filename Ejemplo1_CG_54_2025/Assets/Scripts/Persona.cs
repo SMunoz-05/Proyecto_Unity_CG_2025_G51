@@ -7,8 +7,11 @@ namespace packagePersona
     public class Persona
     {
         //Atributos
+        [SerializeField]
         private string nameP;
+        [SerializeField]
         private string mailP;
+        [SerializeField]
         private string dirP;
 
 
